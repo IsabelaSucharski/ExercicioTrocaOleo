@@ -9,12 +9,6 @@ namespace TrocaOleo
 {
     public class UsuarioDAO
     {
-        public void Inserir()
-        {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog=troca_oleo; Data Source = localhost; Integrated Security=SSPI"))
-            {
-
-            }
-        }
+      
     }
 }

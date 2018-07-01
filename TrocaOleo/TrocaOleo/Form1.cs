@@ -24,6 +24,16 @@ namespace TrocaOleo
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //cmbCliente.DisplayMember = "Categoria";
+            //cmbCategoria.DisplayMember = "Categoria";
+            //cmbOleo.DisplayMember = "Categoria";
+            //cmbTipo.DisplayMember = "Categoria";
+            //cmbFabricante.DisplayMember = "Categoria";
+
+        }
+
+        private void cmbCliente_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }
