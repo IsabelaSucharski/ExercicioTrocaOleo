@@ -39,18 +39,19 @@ create table servico_troca_oleo
 	qtde_litro int
 )
 
---bulk insert usuario
---from 'D:\Documents\GitHub\ExercicioTrocaOleo\usuarios.txt'
---with (codepage='ACP')
+bulk insert usuario
+from 'D:\Documents\GitHub\ExercicioTrocaOleo\usuarios.txt'
+with (codepage='ACP', fieldterminator = ';')
 
---bulk insert cliente
---from 'D:\Documents\GitHub\ExercicioTrocaOleo\Clientes.txt'
---with (codepage='ACP')
+bulk insert cliente
+from 'D:\Documents\GitHub\ExercicioTrocaOleo\Clientes.txt'
+with (codepage='ACP', fieldterminator = ';')
 
---bulk insert oleo
---from 'D:\Documents\GitHub\ExercicioTrocaOleo\Oleos.txt'
---with (codepage='ACP')
+bulk insert oleo
+from 'D:\Documents\GitHub\ExercicioTrocaOleo\Oleos.txt'
+with (codepage='ACP', fieldterminator = ';')
 
+select * from oleo
 
 
 

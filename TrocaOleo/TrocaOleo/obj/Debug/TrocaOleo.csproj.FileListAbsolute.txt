@@ -1,0 +1,11 @@
+D:\Documents\GitHub\ExercicioTrocaOleo\TrocaOleo\TrocaOleo\bin\Debug\TrocaOleo.exe.config
+D:\Documents\GitHub\ExercicioTrocaOleo\TrocaOleo\TrocaOleo\bin\Debug\TrocaOleo.exe
+D:\Documents\GitHub\ExercicioTrocaOleo\TrocaOleo\TrocaOleo\bin\Debug\TrocaOleo.pdb
+D:\Documents\GitHub\ExercicioTrocaOleo\TrocaOleo\TrocaOleo\obj\Debug\TrocaOleo.csprojAssemblyReference.cache
+D:\Documents\GitHub\ExercicioTrocaOleo\TrocaOleo\TrocaOleo\obj\Debug\TrocaOleo.Form1.resources
+D:\Documents\GitHub\ExercicioTrocaOleo\TrocaOleo\TrocaOleo\obj\Debug\TrocaOleo.FormLogin.resources
+D:\Documents\GitHub\ExercicioTrocaOleo\TrocaOleo\TrocaOleo\obj\Debug\TrocaOleo.Properties.Resources.resources
+D:\Documents\GitHub\ExercicioTrocaOleo\TrocaOleo\TrocaOleo\obj\Debug\TrocaOleo.csproj.GenerateResource.cache
+D:\Documents\GitHub\ExercicioTrocaOleo\TrocaOleo\TrocaOleo\obj\Debug\TrocaOleo.csproj.CoreCompileInputs.cache
+D:\Documents\GitHub\ExercicioTrocaOleo\TrocaOleo\TrocaOleo\obj\Debug\TrocaOleo.exe
+D:\Documents\GitHub\ExercicioTrocaOleo\TrocaOleo\TrocaOleo\obj\Debug\TrocaOleo.pdb

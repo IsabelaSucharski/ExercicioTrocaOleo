@@ -1,4 +1,3 @@
-Codigo;Email;senha
 3401;marcos.pereira@gmail.com;brasilpenta
 3402;teste@teste.com;123
 3403;silva12@hotmail.com;qwer

@@ -71,10 +71,13 @@
             // 
             // txtValorTotal
             // 
+            this.txtValorTotal.Enabled = false;
             this.txtValorTotal.Location = new System.Drawing.Point(271, 219);
             this.txtValorTotal.Name = "txtValorTotal";
+            this.txtValorTotal.ReadOnly = true;
             this.txtValorTotal.Size = new System.Drawing.Size(121, 20);
             this.txtValorTotal.TabIndex = 2;
+            this.txtValorTotal.TextChanged += new System.EventHandler(this.txtValorTotal_TextChanged);
             // 
             // cmbCliente
             // 
@@ -119,10 +122,12 @@
             // 
             // txtEmailCliente
             // 
+            this.txtEmailCliente.Enabled = false;
             this.txtEmailCliente.Location = new System.Drawing.Point(271, 245);
             this.txtEmailCliente.Name = "txtEmailCliente";
             this.txtEmailCliente.Size = new System.Drawing.Size(121, 20);
             this.txtEmailCliente.TabIndex = 8;
+            this.txtEmailCliente.TextChanged += new System.EventHandler(this.txtEmailCliente_TextChanged);
             // 
             // lblData
             // 
@@ -136,9 +141,12 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Location = new System.Drawing.Point(271, 5);
+            this.dateTimePicker1.MaxDate = new System.DateTime(2018, 7, 1, 0, 0, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(216, 20);
             this.dateTimePicker1.TabIndex = 10;
+            this.dateTimePicker1.Value = new System.DateTime(2018, 7, 1, 0, 0, 0, 0);
             // 
             // lblCliente
             // 
@@ -211,6 +219,7 @@
             this.lblVTotal.Size = new System.Drawing.Size(58, 13);
             this.lblVTotal.TabIndex = 18;
             this.lblVTotal.Text = "Valor Total";
+            this.lblVTotal.Click += new System.EventHandler(this.lblVTotal_Click);
             // 
             // lblEmailCliente
             // 
@@ -220,6 +229,7 @@
             this.lblEmailCliente.Size = new System.Drawing.Size(67, 13);
             this.lblEmailCliente.TabIndex = 19;
             this.lblEmailCliente.Text = "Email Cliente";
+            this.lblEmailCliente.Click += new System.EventHandler(this.lblEmailCliente_Click);
             // 
             // btnSalvar
             // 
@@ -229,6 +239,7 @@
             this.btnSalvar.TabIndex = 20;
             this.btnSalvar.Text = "Salvar";
             this.btnSalvar.UseVisualStyleBackColor = true;
+            this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
             // 
             // Form1
             // 

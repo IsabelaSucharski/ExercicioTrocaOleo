@@ -1,4 +1,3 @@
-codigo;nome;veiculo;placa;email
 2302;José da Silva;Gol;ACR2302;jose.silva@gmail.com
 2303;Maria Rezende;Palio;MGT2390;maria.rezende@gmail.com
 2304;Lucas Romero;Peugeot;ADF4039;lucas.r@gmail.com

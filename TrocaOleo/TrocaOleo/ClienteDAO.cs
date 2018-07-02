@@ -28,6 +28,8 @@ namespace TrocaOleo
                     var dt = new DataTable();
                     dt.Load(dataReader);
 
+                    if (!(dt != null && dt.Rows.Count > 0))
+                        return null;                                             
                     conn.Close();
                     foreach (DataRow row in dt.Rows)
                     {
@@ -41,11 +43,6 @@ namespace TrocaOleo
                 }
             }
             return lst;
-        }
-
-        public Cliente BuscarPorEmail()
-        {
-
         }
     }
 }
