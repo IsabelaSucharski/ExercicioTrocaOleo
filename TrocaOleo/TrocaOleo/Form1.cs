@@ -14,7 +14,8 @@ namespace TrocaOleo
     {
         public Form1()
         {
-            InitializeComponent();
+            InitializeComponent();   
+            
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -74,7 +75,8 @@ namespace TrocaOleo
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-
+            //ServicoDAO servicoDAO = new ServicoDAO();
+            //servicoDAO.Inserir(ServicoTrocaOleo);
         }
 
         private void lblVTotal_Click(object sender, EventArgs e)
@@ -84,7 +86,7 @@ namespace TrocaOleo
 
         private void txtValorTotal_TextChanged(object sender, EventArgs e)
         {
-            Convert.ToInt32(txtValorTotal = txtValorLitro + txtQtdeLitro); 
+            
         }
 
         private void lblEmailCliente_Click(object sender, EventArgs e)
@@ -94,7 +96,7 @@ namespace TrocaOleo
 
         private void txtEmailCliente_TextChanged(object sender, EventArgs e)
         {
-            
+            if(txt)
         }
     }
 }

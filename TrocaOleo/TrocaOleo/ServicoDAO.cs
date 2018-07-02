@@ -15,20 +15,32 @@ namespace TrocaOleo
             using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
             {
                 string strSQL = @"INSERT INTO servico_troca_oleo (data_servico, cod_cliente, cod_oleo, qtde_litro) VALUES (@data_servico, @cod_cliente, @cod_oleo, @qtde_litro);";
-                
+
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
                     cmd.Parameters.Add("@data_servico", SqlDbType.DateTime).Value = obj.Data;
                     cmd.Parameters.Add("@cod_cliente", SqlDbType.Int).Value = obj.Cliente.Cod;
                     cmd.Parameters.Add("@cod_oleo", SqlDbType.Int).Value = obj.Oleo.Cod;
-                    cmd.Parameters.Add("@qtde_litro", SqlDbType.Int).Value = obj.QtdeLitro;                                    
-                   
+                    cmd.Parameters.Add("@qtde_litro", SqlDbType.Int).Value = obj.QtdeLitro;
+
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
                 }
             }
         }
+
+        //public void Soma()
+        //{
+        //    decimal valor1, valor2, resultado;
+
+        //    valor1 = decimal.Parse(txtQtdeLitro.Text);
+        //    valor2 = decimal.Parse(txtValorLitro.Text);
+
+        //    resultado = valor1 + valor2;
+
+        //    txtValorTotal.Text = resultado.ToString();
+        //}
     }
 }
