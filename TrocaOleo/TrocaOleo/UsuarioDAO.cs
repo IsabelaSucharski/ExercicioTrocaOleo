@@ -49,30 +49,30 @@ namespace TrocaOleo
             }
         }
 
-        //public void Inserir(Usuario obj)
-        //{
-        //    using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
-        //    {
-        //        var usuario = new Usuario();
-        //        var usuarioLogado = new UsuarioDAO().Logar(usuario);
-        //        {
-        //            if (usuarioLogado == null)
-        //            {
-        //                string strSQL = @"INSERT INTO usuario (email, senha) VALUES (@email, @senha);";
+        public void Inserir(Usuario obj)
+        {
+            using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
+            {
+                var usuario = new Usuario();
+                var usuarioLogado =  UsuarioDAO.Logar(usuario);
+                {
+                    if (usuarioLogado == null)
+                    {
+                        string strSQL = @"INSERT INTO usuario (email, senha) VALUES (@email, @senha);";
 
-        //                using (SqlCommand cmd = new SqlCommand(strSQL))
-        //                {
-        //                    cmd.Connection = conn;
-        //                    cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = obj.Email;
-        //                    cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = obj.Senha;
+                        using (SqlCommand cmd = new SqlCommand(strSQL))
+                        {
+                            cmd.Connection = conn;
+                            cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = obj.Email;
+                            cmd.Parameters.Add("@senha", SqlDbType.VarChar).Value = obj.Senha;
 
-        //                    conn.Open();
-        //                    cmd.ExecuteNonQuery();
-        //                    conn.Close();
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+                            conn.Open();
+                            cmd.ExecuteNonQuery();
+                            conn.Close();
+                        }
+                    }
+                }
+            }
+        }
     }
 }

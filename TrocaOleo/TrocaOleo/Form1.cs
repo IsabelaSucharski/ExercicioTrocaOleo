@@ -20,10 +20,10 @@ namespace TrocaOleo
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            //if (cmbOleo.Text != null)
-            //{
-            //    txtEmailCliente.Text = Enabled
-            //}
+            if (txtValorTotal.Text != null)
+            {
+                txtEmailCliente.Enabled = true;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -96,7 +96,25 @@ namespace TrocaOleo
 
         private void txtEmailCliente_TextChanged(object sender, EventArgs e)
         {
-            if(txt)
+           
+        }
+
+        private void txtQtdeLitro_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtQtdeLitro_Validating(object sender, CancelEventArgs e)
+        {
+            decimal qtde_litro, valor_litro, valor_total;
+
+            qtde_litro = Convert.ToDecimal(txtQtdeLitro.Text);
+            valor_litro = Convert.ToDecimal(txtValorLitro.Text);
+
+            valor_total = qtde_litro * valor_litro;
+
+            txtValorTotal.Text = valor_total.ToString();
+
         }
     }
 }

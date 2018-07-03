@@ -28,35 +28,47 @@ namespace TrocaOleo
             Usuario obj = new Usuario();
             obj.Email = txtEmail.Text;
             obj.Senha = txtSenha.Text;
-
-            try
+            if (txtEmail.Text == "" && txtSenha.Text == "")
             {
-                var usuario = UsuarioDAO.Logar(obj);
+                MessageBox.Show("Favor digitar email e senha");
+                txtEmail.Focus();
 
-                if (!usuario.Senha.Equals(txtSenha.Text))
-                {
-                    txtSenha.Clear();
-
-                    MessageBox.Show("Senha Inválida", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    txtSenha.Focus();
-                }
-                if (!usuario.Email.Equals(txtEmail.Text))
-                {
-                    txtEmail.Clear();
-
-                    MessageBox.Show("E-mail Inválida", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    txtEmail.Focus();
-                }
-                else
-                {
-                    MessageBox.Show("Logado com sucesso!");
-                }
             }
-            catch (Exception er)
+            else
             {
-                MessageBox.Show("ERRO: " + er.Message);
+
+
+                try
+                {
+                    var usuario = UsuarioDAO.Logar(obj);
+
+                    if (!usuario.Senha.Equals(txtSenha.Text))
+                    {
+                        txtSenha.Clear();
+
+                        MessageBox.Show("Senha Inválida", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        txtSenha.Focus();
+                    }
+                    if (!usuario.Email.Equals(txtEmail.Text))
+                    {
+                        txtEmail.Clear();
+
+                        MessageBox.Show("E-mail Inválida", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        txtEmail.Focus();
+                    }
+
+
+                    else
+                    {
+                        MessageBox.Show("Logado com sucesso!");
+                    }
+                }
+                catch (Exception er)
+                {
+                    MessageBox.Show("ERRO: " + er.Message);
+                }
             }
         }
     }

@@ -14,7 +14,7 @@ namespace TrocaOleo
         {
             var lst = new List<Cliente>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
+            using (SqlConnection conn = new SqlConnection(@"Data Source=localhost;Initial Catalog=troca_oleo;Integrated Security=True"))
             {
                 string strSQL = "SELECT nome FROM clientes;";
 

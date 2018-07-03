@@ -145,7 +145,7 @@ namespace TrocaOleo
             return lst;
         }
 
-        //public string CarregarValor()
+        //public string CarregarValor(Oleo obj)
         //{
         //    using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
         //    {
@@ -157,7 +157,19 @@ namespace TrocaOleo
         //            cmd.Connection = conn;
         //            cmd.CommandText = strSQL;
 
+        //            var dataReader = cmd.ExecuteReader();
+        //            var dt = new DataTable();
+        //            dt.Load(dataReader);
 
+        //            conn.Close();
+        //            foreach (DataRow row in dt.Rows)
+        //            {
+        //                var oleo = new Oleo()
+        //                {
+        //                    Cod = Convert.ToInt32(row["cod_cliente"]),
+        //                    Fabricante = row["fabicante"].ToString()
+        //                };                        
+        //            }
         //        }
         //    }
         //}
