@@ -25,15 +25,9 @@ namespace TrocaOleo
                 txtEmailCliente.Enabled = true;
             }
         }
-
-        private void Form1_Load(object sender, EventArgs e)
+        public void CarregarClienteCombo()
         {
-            cmbCliente.DisplayMember = "Clientes";
-            cmbOleo.DisplayMember = "Óleo";
-            cmbCategoria.DisplayMember = "Categoria";
-            cmbTipo.DisplayMember = "Tipo";
-            cmbFabricante.DisplayMember = "Fabricante";
-
+             cmbCliente.DisplayMember = "cliente";
             ClienteDAO clienteDao = new ClienteDAO();
             List<Cliente> cliente = clienteDao.CarregarCliente();
 
@@ -41,9 +35,30 @@ namespace TrocaOleo
             {
                 cmbCliente.Items.Add(cli.Nome);
             }
+        }
+
+        public void CarregarOleoCombo()
+        {
+
+        }
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            CarregarClienteCombo();
+            
+            cmbOleo.DisplayMember = "nome";
+            cmbCategoria.DisplayMember = "categoria";
+            cmbTipo.DisplayMember = "tipo";
+            cmbFabricante.DisplayMember = "fabricante";
+
+           
 
             OleoDAO oleoDao = new OleoDAO();
-            List<Oleo> oleo = oleoDao.CarregarOleo();
+            List<Oleo> oleo = oleoDao.CarregarNome();
+            oleoDao.CarregarCategoria();
+            oleoDao.CarregarTipo();
+            oleoDao.CarregarFabricante();          
 
             foreach (var ole in oleo)
             {
@@ -68,7 +83,7 @@ namespace TrocaOleo
                 if (clienteDao.ValidarEmail(txtEmailCliente.Text) == false)
                 {
                     txtEmailCliente.Clear();
-                    MessageBox.Show("Email invállida", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Email inválido", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtEmailCliente.Focus();
                 }
                 else
@@ -131,7 +146,6 @@ namespace TrocaOleo
             valor_total = qtde_litro * valor_litro;
 
             txtValorTotal.Text = valor_total.ToString();
-
         }
     }
 }

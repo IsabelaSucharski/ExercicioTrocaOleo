@@ -21,7 +21,6 @@ namespace TrocaOleo
                 using (SqlCommand cmdo = new SqlCommand())
                 {
                     cmdo.CommandType = CommandType.Text;
-
                     cmdo.Connection = conn;
                     cmdo.CommandText = srtSQL;
                     SqlDataReader dataReader;
@@ -33,10 +32,10 @@ namespace TrocaOleo
                         return null;
 
                     List<Cliente> lst = new List<Cliente>();
-                    foreach (DataRow linha in dt.Rows)
+                    foreach (DataRow row in dt.Rows)
                     {
                         Cliente cli = new Cliente();
-                        cli.Nome = Convert.ToString(linha["nome"]);
+                        cli.Nome = Convert.ToString(row["nome"]);
                         lst.Add(cli);
                     }
                     conn.Close();

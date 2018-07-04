@@ -55,6 +55,14 @@ namespace TrocaOleo
 
                         txtEmail.Focus();
                     }
+                    if(!usuario.Email.Equals(txtEmail.Text) && !usuario.Senha.Equals(txtSenha.Text))
+                    {
+                        txtEmail.Clear();
+
+                        MessageBox.Show("E-mail e senha Inválidos", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        txtEmail.Focus();
+                    }
                                         
                     else
                     {
@@ -66,6 +74,8 @@ namespace TrocaOleo
                     MessageBox.Show("ERRO: " + er.Message);
                 }
             }
+            Form1 form = new Form1();
+            form.Show();
         }
     }
 }
