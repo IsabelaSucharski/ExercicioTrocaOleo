@@ -32,26 +32,25 @@ create table oleo
 
 create table servico_troca_oleo
 (
-	cod_servico int primary key,
-	data_servico datetime default getdate(),
-	cod_cliente int references cliente (cod_cliente),
-	cod_oleo int references oleo(cod_oleo),
-	qtde_litro int
+	id_troca	integer primary key identity(1,1),
+	data		varchar(50),
+	cliente		varchar(50),
+	oleo		varchar(50),
+	categoria	varchar(50),
+	tipo		varchar(50),
+	fabricante	varchar(50),
+	valor_total	varchar(50),
+	email		varchar(50)
 )
 
 bulk insert usuario
-from 'D:\Documents\GitHub\ExercicioTrocaOleo\usuarios.txt'
+from 'C:\Users\Aluno\Documents\GitHub\ExercicioTrocaOleo\usuarios.txt'
 with (codepage='ACP', fieldterminator = ';')
 
 bulk insert cliente
-from 'D:\Documents\GitHub\ExercicioTrocaOleo\Clientes.txt'
+from 'C:\Users\Aluno\Documents\GitHub\ExercicioTrocaOleo\Clientes.txt'
 with (codepage='ACP', fieldterminator = ';')
 
 bulk insert oleo
-from 'D:\Documents\GitHub\ExercicioTrocaOleo\Oleos.txt'
+from 'C:\Users\Aluno\Documents\GitHub\ExercicioTrocaOleo\Oleos.txt'
 with (codepage='ACP', fieldterminator = ';')
-
-select * from oleo
-
-
-

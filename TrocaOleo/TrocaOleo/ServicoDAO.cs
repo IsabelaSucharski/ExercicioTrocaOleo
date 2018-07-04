@@ -12,35 +12,27 @@ namespace TrocaOleo
     {
         public void Inserir(ServicoTrocaOleo obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
+            using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.conn))
             {
-                string strSQL = @"INSERT INTO servico_troca_oleo (data_servico, cod_cliente, cod_oleo, qtde_litro) VALUES (@data_servico, @cod_cliente, @cod_oleo, @qtde_litro);";
+                string strSQL = @"INSERT INTO servico_troca_oleo (data, cliente, oleo, categoria, tipo, fabricante, valor_total, email) VALUES (@data, @cliente, @oleo, @categoria, @tipo, @fabricante, @valor_Total, @email);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@data_servico", SqlDbType.DateTime).Value = obj.Data;
-                    cmd.Parameters.Add("@cod_cliente", SqlDbType.Int).Value = obj.Cliente.Cod;
-                    cmd.Parameters.Add("@cod_oleo", SqlDbType.Int).Value = obj.Oleo.Cod;
-                    cmd.Parameters.Add("@qtde_litro", SqlDbType.Int).Value = obj.QtdeLitro;
+                    cmd.Parameters.Add("@Data", SqlDbType.VarChar).Value = obj.Data;
+                    cmd.Parameters.Add("@Cliente", SqlDbType.VarChar).Value = obj.Cliente;
+                    cmd.Parameters.Add("@Oleo", SqlDbType.VarChar).Value = obj.Oleo;
+                    cmd.Parameters.Add("@Categoria", SqlDbType.VarChar).Value = obj.Categoria;
+                    cmd.Parameters.Add("@Tipo", SqlDbType.VarChar).Value = obj.Tipo;
+                    cmd.Parameters.Add("@Fabricante", SqlDbType.VarChar).Value = obj.Fabricante;
+                    cmd.Parameters.Add("@ValorTotal", SqlDbType.VarChar).Value = obj.ValorTotal;
+                    cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = obj.Email;
 
                     conn.Open();
                     cmd.ExecuteNonQuery();
                     conn.Close();
                 }
             }
-        }
-
-        //public void Soma()
-        //{
-        //    decimal valor1, valor2, resultado;
-
-        //    valor1 = decimal.Parse(txtQtdeLitro.Text);
-        //    valor2 = decimal.Parse(txtValorLitro.Text);
-
-        //    resultado = valor1 + valor2;
-
-        //    txtValorTotal.Text = resultado.ToString();
-        //}
+        }       
     }
 }

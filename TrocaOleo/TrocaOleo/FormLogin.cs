@@ -30,14 +30,11 @@ namespace TrocaOleo
             obj.Senha = txtSenha.Text;
             if (txtEmail.Text == "" && txtSenha.Text == "")
             {
-                MessageBox.Show("Favor digitar email e senha");
+                MessageBox.Show("Favor digitar e-mail e senha");
                 txtEmail.Focus();
-
             }
             else
             {
-
-
                 try
                 {
                     var usuario = UsuarioDAO.Logar(obj);
@@ -58,8 +55,7 @@ namespace TrocaOleo
 
                         txtEmail.Focus();
                     }
-
-
+                                        
                     else
                     {
                         MessageBox.Show("Logado com sucesso!");

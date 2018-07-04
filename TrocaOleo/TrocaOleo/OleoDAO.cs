@@ -8,142 +8,228 @@ using System.Threading.Tasks;
 
 namespace TrocaOleo
 {
+   
+
     public class OleoDAO
     {
-        public List<Oleo> CarregarNome()
+        public List<Oleo> CarregarOleo()
         {
-            var lst = new List<Oleo>();
-
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
+            using (SqlConnection conn = new
+            SqlConnection(Properties.Settings.Default.conn))
             {
-                string strSQL = "SELECT nome FROM oleo;";
-
-                using (SqlCommand cmd = new SqlCommand(strSQL))
+                string srtSQL = "SELECT * FROM oleo";
+                DataTable dt = new DataTable();
+                conn.Open();
+                using (SqlCommand cmdo = new SqlCommand())
                 {
-                    conn.Open();
-                    cmd.Connection = conn;
-                    cmd.CommandText = strSQL;
+                    cmdo.CommandType = CommandType.Text;
 
-                    var dataReader = cmd.ExecuteReader();
-                    var dt = new DataTable();
+                    cmdo.Connection = conn;
+                    cmdo.CommandText = srtSQL;
+                    SqlDataReader dataReader;
+
+                    dataReader = cmdo.ExecuteReader();
                     dt.Load(dataReader);
 
                     if (!(dt != null && dt.Rows.Count > 0))
                         return null;
 
-                    conn.Close();
-                    foreach (DataRow row in dt.Rows)
+                    List<Oleo> lst = new List<Oleo>();
+                    foreach (DataRow linha in dt.Rows)
                     {
-                        var oleo = new Oleo()
-                        {
-                            Cod = Convert.ToInt32(row["cod_oleo"]),
-                            Nome = row["nome"].ToString()
-                        };
+                        Oleo oleo = new Oleo();
+                        oleo.Nome = Convert.ToString(linha["nome"]);
+                        oleo.Categoria = Convert.ToString(linha["categoria"]);
+                        oleo.Tipo = Convert.ToString(linha["tipo"]);
+                        oleo.Fabricante = Convert.ToString(linha["fabricante"]);
                         lst.Add(oleo);
                     }
-                }
-            }
-            return lst;
-        }
-
-        public List<Oleo> CarregarCategoria()
-        {
-            var lst = new List<Oleo>();
-
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
-            {
-                string strSQL = "SELECT categoria FROM oleo;";
-
-                using (SqlCommand cmd = new SqlCommand(strSQL))
-                {
-                    conn.Open();
-                    cmd.Connection = conn;
-                    cmd.CommandText = strSQL;
-
-                    var dataReader = cmd.ExecuteReader();
-                    var dt = new DataTable();
-                    dt.Load(dataReader);
-
                     conn.Close();
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        var oleo = new Oleo()
-                        {
-                            Cod = Convert.ToInt32(row["cod_oleo"]),
-                            Categoria = row["categoria"].ToString()
-                        };
-                        lst.Add(oleo);
-                    }
+                    return lst;
+
                 }
             }
-            return lst;
         }
 
-        public List<Oleo> CarregarTipo()
-        {
-            var lst = new List<Oleo>();
+        //public List<Oleo> CarregarOleos()
+        //{
+        //    using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.conn))
+        //    {
+        //        string strSQL = "select * from Oleo";
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
-            {
-                string strSQL = "SELECT tipo FROM oleo;";
+        //        DataTable dt = new DataTable();
+        //        conn.Open();
 
-                using (SqlCommand cmd = new SqlCommand(strSQL))
-                {
-                    conn.Open();
-                    cmd.Connection = conn;
-                    cmd.CommandText = strSQL;
+        //        using (SqlCommand cmdo = new SqlCommand())
+        //        {
+        //            cmdo.CommandType = CommandType.Text;
+        //            cmdo.Connection = conn;
+        //            cmdo.CommandText = strSQL;
 
-                    var dataReader = cmd.ExecuteReader();
-                    var dt = new DataTable();
-                    dt.Load(dataReader);
+        //            SqlDataReader dataReader;
+        //            dataReader = cmdo.ExecuteReader();
+        //            dt.Load(dataReader);
 
-                    conn.Close();
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        var oleo = new Oleo()
-                        {
-                            Cod = Convert.ToInt32(row["cod_cliente"]),
-                            Tipo = row["tipo"].ToString()
-                        };
-                        lst.Add(oleo);
-                    }
-                }
-            }
-            return lst;
-        }
+        //            if (!(dt != null && dt.Rows.Count > 0))
+        //                return null;
 
-        public List<Oleo> CarregarFabricante()
-        {
-            var lst = new List<Oleo>();
+        //            List<Oleo> lstOleo = new List<Oleo>();
 
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
-            {
-                string strSQL = "SELECT fabricante FROM oleo;";
+        //            foreach (DataRow linha in dt.Rows)
+        //            {
+        //                Oleo oleo = new Oleo();
 
-                using (SqlCommand cmd = new SqlCommand(strSQL))
-                {
-                    conn.Open();
-                    cmd.Connection = conn;
-                    cmd.CommandText = strSQL;
+        //                oleo.Cod = Convert.ToInt32(linha["cod_oleo"]);
+        //                oleo.Nome = Convert.ToString(linha["nome"]);
+        //                oleo.Categoria = Convert.ToString(linha["categoria"]);
+        //                oleo.Tipo = Convert.ToString(linha["tipo"]);
+        //                oleo.Fabricante = Convert.ToString(linha["fabricante"]);
+        //                oleo.Valor = Convert.ToDouble(linha["valor"]);
 
-                    var dataReader = cmd.ExecuteReader();
-                    var dt = new DataTable();
-                    dt.Load(dataReader);
+        //                lstOleo.Add(oleo);
+        //            }
 
-                    conn.Close();
-                    foreach (DataRow row in dt.Rows)
-                    {
-                        var oleo = new Oleo()
-                        {
-                            Cod = Convert.ToInt32(row["cod_cliente"]),
-                            Fabricante = row["fabicante"].ToString()
-                        };
-                        lst.Add(oleo);
-                    }
-                }
-            }
-            return lst;
-        }
+        //            conn.Close();
+        //            return lstOleo;
+        //        }
+        //    }
+        //}
+
+
+        //public List<Oleo> CarregarNome()
+        //{
+        //    var lst = new List<Oleo>();
+
+        //    using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
+        //    {
+        //        string strSQL = "SELECT nome FROM oleo;";
+
+        //        using (SqlCommand cmd = new SqlCommand(strSQL))
+        //        {
+        //            conn.Open();
+        //            cmd.Connection = conn;
+        //            cmd.CommandText = strSQL;
+
+        //            var dataReader = cmd.ExecuteReader();
+        //            var dt = new DataTable();
+        //            dt.Load(dataReader);
+
+        //            if (!(dt != null && dt.Rows.Count > 0))
+        //                return null;
+
+        //            conn.Close();
+        //            foreach (DataRow row in dt.Rows)
+        //            {
+        //                var oleo = new Oleo()
+        //                {
+        //                    Cod = Convert.ToInt32(row["cod_oleo"]),
+        //                    Nome = row["nome"].ToString()
+        //                };
+        //                lst.Add(oleo);
+        //            }
+        //        }
+        //    }
+        //    return lst;
+        //}
+
+        //public List<Oleo> CarregarCategoria()
+        //{
+        //    var lst = new List<Oleo>();
+
+        //    using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
+        //    {
+        //        string strSQL = "SELECT categoria FROM oleo;";
+
+        //        using (SqlCommand cmd = new SqlCommand(strSQL))
+        //        {
+        //            conn.Open();
+        //            cmd.Connection = conn;
+        //            cmd.CommandText = strSQL;
+
+        //            var dataReader = cmd.ExecuteReader();
+        //            var dt = new DataTable();
+        //            dt.Load(dataReader);
+
+        //            conn.Close();
+        //            foreach (DataRow row in dt.Rows)
+        //            {
+        //                var oleo = new Oleo()
+        //                {
+        //                    Cod = Convert.ToInt32(row["cod_oleo"]),
+        //                    Categoria = row["categoria"].ToString()
+        //                };
+        //                lst.Add(oleo);
+        //            }
+        //        }
+        //    }
+        //    return lst;
+        //}
+
+        //public List<Oleo> CarregarTipo()
+        //{
+        //    var lst = new List<Oleo>();
+
+        //    using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
+        //    {
+        //        string strSQL = "SELECT tipo FROM oleo;";
+
+        //        using (SqlCommand cmd = new SqlCommand(strSQL))
+        //        {
+        //            conn.Open();
+        //            cmd.Connection = conn;
+        //            cmd.CommandText = strSQL;
+
+        //            var dataReader = cmd.ExecuteReader();
+        //            var dt = new DataTable();
+        //            dt.Load(dataReader);
+
+        //            conn.Close();
+        //            foreach (DataRow row in dt.Rows)
+        //            {
+        //                var oleo = new Oleo()
+        //                {
+        //                    Cod = Convert.ToInt32(row["cod_cliente"]),
+        //                    Tipo = row["tipo"].ToString()
+        //                };
+        //                lst.Add(oleo);
+        //            }
+        //        }
+        //    }
+        //    return lst;
+        //}
+
+        //public List<Oleo> CarregarFabricante()
+        //{
+        //    var lst = new List<Oleo>();
+
+        //    using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
+        //    {
+        //        string strSQL = "SELECT fabricante FROM oleo;";
+
+        //        using (SqlCommand cmd = new SqlCommand(strSQL))
+        //        {
+        //            conn.Open();
+        //            cmd.Connection = conn;
+        //            cmd.CommandText = strSQL;
+
+        //            var dataReader = cmd.ExecuteReader();
+        //            var dt = new DataTable();
+        //            dt.Load(dataReader);
+
+        //            conn.Close();
+        //            foreach (DataRow row in dt.Rows)
+        //            {
+        //                var oleo = new Oleo()
+        //                {
+        //                    Cod = Convert.ToInt32(row["cod_cliente"]),
+        //                    Fabricante = row["fabicante"].ToString()
+        //                };
+        //                lst.Add(oleo);
+        //            }
+        //        }
+        //    }
+        //    return lst;
+        //}
 
         //public string CarregarValor(Oleo obj)
         //{
@@ -168,7 +254,7 @@ namespace TrocaOleo
         //                {
         //                    Cod = Convert.ToInt32(row["cod_cliente"]),
         //                    Fabricante = row["fabicante"].ToString()
-        //                };                        
+        //                };
         //            }
         //        }
         //    }

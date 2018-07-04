@@ -28,43 +28,29 @@ namespace TrocaOleo
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            cmbCliente.DisplayMember = "Cliente";
+            cmbCliente.DisplayMember = "Clientes";
+            cmbOleo.DisplayMember = "Óleo";
             cmbCategoria.DisplayMember = "Categoria";
-            cmbOleo.DisplayMember = "Oleo";
             cmbTipo.DisplayMember = "Tipo";
             cmbFabricante.DisplayMember = "Fabricante";
 
-            ClienteDAO clienteDAO = new ClienteDAO();
-            List<Cliente> clientes = clienteDAO.CarregarCliente();
+            ClienteDAO clienteDao = new ClienteDAO();
+            List<Cliente> cliente = clienteDao.CarregarCliente();
 
-            foreach (var cli in clientes)
+            foreach (var cli in cliente)
             {
-                cmbCliente.Items.Add(cli);
+                cmbCliente.Items.Add(cli.Nome);
             }
 
-            OleoDAO oleoDAO = new OleoDAO();
-            List<Oleo> oleo = oleoDAO.CarregarNome();
-            foreach(var nome in oleo)
-            {
-                cmbOleo.Items.Add(nome);
-            }
-                        
-            List<Oleo> Otipo = oleoDAO.CarregarTipo();
-            foreach (var tipo in Otipo)
-            {
-                cmbTipo.Items.Add(tipo);
-            }
+            OleoDAO oleoDao = new OleoDAO();
+            List<Oleo> oleo = oleoDao.CarregarOleo();
 
-            List<Oleo> Ocategoria = oleoDAO.CarregarCategoria();
-            foreach (var cat in Ocategoria)
+            foreach (var ole in oleo)
             {
-                cmbCategoria.Items.Add(cat);
-            }
-
-            List<Oleo> Ofabricante = oleoDAO.CarregarFabricante();
-            foreach (var fab in Ocategoria)
-            {
-                cmbFabricante.Items.Add(fab);
+                cmbOleo.Items.Add(ole.Nome);
+                cmbCategoria.Items.Add(ole.Categoria);
+                cmbTipo.Items.Add(ole.Tipo);
+                cmbFabricante.Items.Add(ole.Fabricante);
             }
         }
 
@@ -75,8 +61,39 @@ namespace TrocaOleo
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
-            //ServicoDAO servicoDAO = new ServicoDAO();
-            //servicoDAO.Inserir(ServicoTrocaOleo);
+            try
+            {
+                ClienteDAO clienteDao = new ClienteDAO();
+
+                if (clienteDao.ValidarEmail(txtEmailCliente.Text) == false)
+                {
+                    txtEmailCliente.Clear();
+                    MessageBox.Show("Email invállida", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtEmailCliente.Focus();
+                }
+                else
+                {
+                    var obj = new ServicoTrocaOleo();
+                    obj.Data = dateTimePicker1.Text;
+                    obj.Cliente = cmbCliente.Text;
+                    obj.Oleo = cmbOleo.Text;
+                    obj.Categoria = cmbCategoria.Text;
+                    obj.Tipo = cmbTipo.Text;
+                    obj.Fabricante = cmbFabricante.Text;
+                    obj.ValorTotal = txtValorTotal.Text;
+                    obj.Email = txtEmailCliente.Text;
+
+                    new ServicoDAO().Inserir(obj);
+
+                    MessageBox.Show("Dados salvos com sucesso");
+                    this.Hide();
+                    new Form1().Show();
+                }
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show("ERRO: " + er.Message);
+            }
         }
 
         private void lblVTotal_Click(object sender, EventArgs e)

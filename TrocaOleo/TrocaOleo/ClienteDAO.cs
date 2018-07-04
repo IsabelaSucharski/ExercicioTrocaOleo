@@ -12,37 +12,58 @@ namespace TrocaOleo
     {
         public List<Cliente> CarregarCliente()
         {
-            var lst = new List<Cliente>();
-
-            using (SqlConnection conn = new SqlConnection(@"Data Source=localhost;Initial Catalog=troca_oleo;Integrated Security=True"))
+            using (SqlConnection conn = new
+            SqlConnection(Properties.Settings.Default.conn))
             {
-                string strSQL = "SELECT nome FROM clientes;";
-
-                using (SqlCommand cmd = new SqlCommand(strSQL))
+                string srtSQL = "SELECT nome FROM cliente";
+                DataTable dt = new DataTable();
+                conn.Open();
+                using (SqlCommand cmdo = new SqlCommand())
                 {
-                    conn.Open();
-                    cmd.Connection = conn;
-                    cmd.CommandText = strSQL;
+                    cmdo.CommandType = CommandType.Text;
 
-                    var dataReader = cmd.ExecuteReader();
-                    var dt = new DataTable();
+                    cmdo.Connection = conn;
+                    cmdo.CommandText = srtSQL;
+                    SqlDataReader dataReader;
+
+                    dataReader = cmdo.ExecuteReader();
                     dt.Load(dataReader);
 
                     if (!(dt != null && dt.Rows.Count > 0))
-                        return null;                                             
-                    conn.Close();
-                    foreach (DataRow row in dt.Rows)
+                        return null;
+
+                    List<Cliente> lst = new List<Cliente>();
+                    foreach (DataRow linha in dt.Rows)
                     {
-                        var Cliente = new Cliente()
-                        {
-                            Cod = Convert.ToInt32(row["cod_cliente"]),
-                            Nome = row["nome"].ToString()
-                        };
-                        lst.Add(Cliente);
+                        Cliente cli = new Cliente();
+                        cli.Nome = Convert.ToString(linha["nome"]);
+                        lst.Add(cli);
                     }
+                    conn.Close();
+                    return lst;
                 }
             }
-            return lst;
+        }
+
+        public bool ValidarEmail(string email)
+        {
+            if (String.IsNullOrEmpty(email))
+                return false;
+            if (!email.Contains("@") || !email.Contains("."))
+                return false;
+            string[] strCamposEmail = email.Split(new String[] { "@" }, StringSplitOptions.RemoveEmptyEntries);
+            if (strCamposEmail.Length != 2)
+                return false;
+            if (strCamposEmail[0].Length < 3)
+                return false;
+            if (!strCamposEmail[1].Contains("."))
+                return false;
+            strCamposEmail = strCamposEmail[1].Split(new String[] { "." }, StringSplitOptions.RemoveEmptyEntries);
+            if (strCamposEmail.Length < 2)
+                return false;
+            if (strCamposEmail[0].Length < 1)
+                return false;
+            return true;
         }
     }
 }
