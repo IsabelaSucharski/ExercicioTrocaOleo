@@ -37,9 +37,10 @@
             // 
             // btnEntrar
             // 
-            this.btnEntrar.Location = new System.Drawing.Point(482, 241);
+            this.btnEntrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEntrar.Location = new System.Drawing.Point(325, 78);
             this.btnEntrar.Name = "btnEntrar";
-            this.btnEntrar.Size = new System.Drawing.Size(75, 23);
+            this.btnEntrar.Size = new System.Drawing.Size(75, 27);
             this.btnEntrar.TabIndex = 30;
             this.btnEntrar.Text = "Entrar";
             this.btnEntrar.UseVisualStyleBackColor = true;
@@ -48,45 +49,53 @@
             // lblSenha
             // 
             this.lblSenha.AutoSize = true;
-            this.lblSenha.Location = new System.Drawing.Point(244, 219);
+            this.lblSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSenha.Location = new System.Drawing.Point(95, 71);
             this.lblSenha.Name = "lblSenha";
-            this.lblSenha.Size = new System.Drawing.Size(38, 13);
+            this.lblSenha.Size = new System.Drawing.Size(65, 24);
             this.lblSenha.TabIndex = 29;
             this.lblSenha.Text = "Senha";
             // 
             // lblEmail
             // 
             this.lblEmail.AutoSize = true;
-            this.lblEmail.Location = new System.Drawing.Point(244, 193);
+            this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEmail.Location = new System.Drawing.Point(95, 45);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(35, 13);
+            this.lblEmail.Size = new System.Drawing.Size(63, 24);
             this.lblEmail.TabIndex = 28;
             this.lblEmail.Text = "E-mail";
             // 
             // txtSenha
             // 
-            this.txtSenha.Location = new System.Drawing.Point(341, 212);
+            this.txtSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSenha.Location = new System.Drawing.Point(185, 68);
             this.txtSenha.Name = "txtSenha";
-            this.txtSenha.Size = new System.Drawing.Size(121, 20);
+            this.txtSenha.PasswordChar = '*';
+            this.txtSenha.Size = new System.Drawing.Size(121, 27);
             this.txtSenha.TabIndex = 27;
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(341, 186);
+            this.txtEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtEmail.Location = new System.Drawing.Point(185, 42);
             this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(121, 20);
+            this.txtEmail.Size = new System.Drawing.Size(121, 27);
             this.txtEmail.TabIndex = 26;
             // 
             // FormLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackgroundImage = global::TrocaOleo.Properties.Resources.engine_oil_level;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ClientSize = new System.Drawing.Size(486, 316);
             this.Controls.Add(this.btnEntrar);
             this.Controls.Add(this.lblSenha);
             this.Controls.Add(this.lblEmail);
             this.Controls.Add(this.txtSenha);
             this.Controls.Add(this.txtEmail);
+            this.DoubleBuffered = true;
             this.Name = "FormLogin";
             this.Text = "FormLogin";
             this.Load += new System.EventHandler(this.FormLogin_Load);

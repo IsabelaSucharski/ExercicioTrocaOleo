@@ -14,7 +14,7 @@ namespace TrocaOleo
     {
         public Form1()
         {
-            InitializeComponent();   
+            InitializeComponent();  
             
         }
 
@@ -39,26 +39,8 @@ namespace TrocaOleo
 
         public void CarregarOleoCombo()
         {
-
-        }
-
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            CarregarClienteCombo();
-            
-            cmbOleo.DisplayMember = "nome";
-            cmbCategoria.DisplayMember = "categoria";
-            cmbTipo.DisplayMember = "tipo";
-            cmbFabricante.DisplayMember = "fabricante";
-
-           
-
             OleoDAO oleoDao = new OleoDAO();
-            List<Oleo> oleo = oleoDao.CarregarNome();
-            oleoDao.CarregarCategoria();
-            oleoDao.CarregarTipo();
-            oleoDao.CarregarFabricante();          
+            List<Oleo> oleo = oleoDao.CarregarOleo();
 
             foreach (var ole in oleo)
             {
@@ -67,6 +49,14 @@ namespace TrocaOleo
                 cmbTipo.Items.Add(ole.Tipo);
                 cmbFabricante.Items.Add(ole.Fabricante);
             }
+        }
+
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            txtValorLitro.Focus();
+            CarregarClienteCombo();
+            CarregarOleoCombo();                                     
         }
 
         private void cmbCliente_SelectedIndexChanged(object sender, EventArgs e)
@@ -89,13 +79,15 @@ namespace TrocaOleo
                 else
                 {
                     var obj = new ServicoTrocaOleo();
-                    obj.Data = dateTimePicker1.Text;
+                    obj.Data = dateTimePicker1.Value;
                     obj.Cliente = cmbCliente.Text;
                     obj.Oleo = cmbOleo.Text;
                     obj.Categoria = cmbCategoria.Text;
                     obj.Tipo = cmbTipo.Text;
                     obj.Fabricante = cmbFabricante.Text;
-                    obj.ValorTotal = txtValorTotal.Text;
+                    obj.ValorLitro = Convert.ToDecimal(txtValorLitro.Text);
+                    obj.QtdeLitro = Convert.ToInt32(txtQtdeLitro.Text);
+                    obj.ValorTotal = Convert.ToDecimal(txtValorTotal.Text);
                     obj.Email = txtEmailCliente.Text;
 
                     new ServicoDAO().Inserir(obj);
@@ -138,12 +130,15 @@ namespace TrocaOleo
 
         private void txtQtdeLitro_Validating(object sender, CancelEventArgs e)
         {
-            decimal qtde_litro, valor_litro, valor_total;
+            decimal qtde_litro = 0, valor_litro = 0, valor_total = 0;
 
-            qtde_litro = Convert.ToDecimal(txtQtdeLitro.Text);
-            valor_litro = Convert.ToDecimal(txtValorLitro.Text);
+            if(txtValorLitro.Text != "" && txtQtdeLitro.Text != "")
+            {
+                qtde_litro = Convert.ToDecimal(txtQtdeLitro.Text);
+                valor_litro = Convert.ToDecimal(txtValorLitro.Text);
 
-            valor_total = qtde_litro * valor_litro;
+                valor_total = qtde_litro * valor_litro;
+            }  
 
             txtValorTotal.Text = valor_total.ToString();
         }

@@ -10,9 +10,9 @@ namespace TrocaOleo
 {
     public class UsuarioDAO
     {
-        public static Usuario Logar(Usuario obj)
+        public Usuario Logar(Usuario obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
+            using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.conn))
             {
                 string strSQL = "select email, senha from Usuario " +
                     "where email = @email or senha = @senha";
@@ -51,7 +51,7 @@ namespace TrocaOleo
 
         public static void Inserir(Usuario obj)
         {
-            using (SqlConnection conn = new SqlConnection(@"Initial Catalog = TrocaOleo; Data Source = localhost; Integrated Security = SSPI"))
+            using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.conn))
             {
 
                 string strSQL = @"INSERT INTO usuario (email, senha) VALUES (@email, @senha);";

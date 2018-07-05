@@ -19,63 +19,46 @@ namespace TrocaOleo
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            
+
 
         }
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
             Usuario obj = new Usuario();
+
             obj.Email = txtEmail.Text;
             obj.Senha = txtSenha.Text;
-            if (txtEmail.Text == "" && txtSenha.Text == "")
+
+            try
             {
-                MessageBox.Show("Favor digitar e-mail e senha");
-                txtEmail.Focus();
-            }
-            else
-            {
-                try
+                var usuario = new UsuarioDAO().Logar(obj);
+                ClienteDAO clienteDao = new ClienteDAO();
+
+                if (!usuario.Senha.Equals(txtSenha.Text))
                 {
-                    var usuario = UsuarioDAO.Logar(obj);
-
-                    if (!usuario.Senha.Equals(txtSenha.Text))
-                    {
-                        txtSenha.Clear();
-
-                        MessageBox.Show("Senha Inválida", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        txtSenha.Focus();
-                    }
-                    if (!usuario.Email.Equals(txtEmail.Text))
-                    {
-                        txtEmail.Clear();
-
-                        MessageBox.Show("E-mail Inválida", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        txtEmail.Focus();
-                    }
-                    if(!usuario.Email.Equals(txtEmail.Text) && !usuario.Senha.Equals(txtSenha.Text))
-                    {
-                        txtEmail.Clear();
-
-                        MessageBox.Show("E-mail e senha Inválidos", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        txtEmail.Focus();
-                    }
-                                        
-                    else
-                    {
-                        MessageBox.Show("Logado com sucesso!");
-                    }
+                    txtSenha.Clear();
+                    MessageBox.Show("LOGIN INVALIDO", "Alerta", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtSenha.Focus();
                 }
-                catch (Exception er)
+                else if (!usuario.Email.Equals(txtEmail.Text))
                 {
-                    MessageBox.Show("ERRO: " + er.Message);
+                    UsuarioDAO.Inserir(obj);
+                    MessageBox.Show("NOVA CONTA SALVA");
+                    this.Hide();
+                    new Form1().Show();
+                }
+                else
+                {
+                    MessageBox.Show("LOGADO COM SUCESSO");
+                    this.Hide();
+                    new Form1().Show();
                 }
             }
-            Form1 form = new Form1();
-            form.Show();
+            catch (Exception er)
+            {
+                MessageBox.Show("ERRO: " + er.Message);
+            }
         }
     }
 }

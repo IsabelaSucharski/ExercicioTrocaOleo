@@ -12,10 +12,13 @@ namespace TrocaOleo
     {
         public List<Cliente> CarregarCliente()
         {
+            var lst = new List<Cliente>();
+
             using (SqlConnection conn = new
             SqlConnection(Properties.Settings.Default.conn))
             {
                 string srtSQL = "SELECT nome FROM cliente";
+
                 DataTable dt = new DataTable();
                 conn.Open();
                 using (SqlCommand cmdo = new SqlCommand())
@@ -30,15 +33,14 @@ namespace TrocaOleo
 
                     if (!(dt != null && dt.Rows.Count > 0))
                         return null;
+                    conn.Close();
 
-                    List<Cliente> lst = new List<Cliente>();
                     foreach (DataRow row in dt.Rows)
                     {
                         Cliente cli = new Cliente();
                         cli.Nome = Convert.ToString(row["nome"]);
                         lst.Add(cli);
                     }
-                    conn.Close();
                     return lst;
                 }
             }

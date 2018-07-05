@@ -14,19 +14,21 @@ namespace TrocaOleo
         {
             using (SqlConnection conn = new SqlConnection(Properties.Settings.Default.conn))
             {
-                string strSQL = @"INSERT INTO servico_troca_oleo (data, cliente, oleo, categoria, tipo, fabricante, valor_total, email) VALUES (@data, @cliente, @oleo, @categoria, @tipo, @fabricante, @valor_Total, @email);";
+                string strSQL = @"INSERT INTO servico_troca_oleo (data, cliente, oleo, categoria, tipo, fabricante, valor_litro, valor_total, qtde, email) VALUES (@data, @cliente, @oleo, @categoria, @tipo, @fabricante, @valor_litro, @valor_Total, @qtde, @email);";
 
                 using (SqlCommand cmd = new SqlCommand(strSQL))
                 {
                     cmd.Connection = conn;
-                    cmd.Parameters.Add("@Data", SqlDbType.VarChar).Value = obj.Data;
-                    cmd.Parameters.Add("@Cliente", SqlDbType.VarChar).Value = obj.Cliente;
-                    cmd.Parameters.Add("@Oleo", SqlDbType.VarChar).Value = obj.Oleo;
-                    cmd.Parameters.Add("@Categoria", SqlDbType.VarChar).Value = obj.Categoria;
-                    cmd.Parameters.Add("@Tipo", SqlDbType.VarChar).Value = obj.Tipo;
-                    cmd.Parameters.Add("@Fabricante", SqlDbType.VarChar).Value = obj.Fabricante;
-                    cmd.Parameters.Add("@ValorTotal", SqlDbType.VarChar).Value = obj.ValorTotal;
-                    cmd.Parameters.Add("@Email", SqlDbType.VarChar).Value = obj.Email;
+                    cmd.Parameters.Add("@data", SqlDbType.VarChar).Value = obj.Data;
+                    cmd.Parameters.Add("@cliente", SqlDbType.VarChar).Value = obj.Cliente;
+                    cmd.Parameters.Add("@oleo", SqlDbType.VarChar).Value = obj.Oleo;
+                    cmd.Parameters.Add("@categoria", SqlDbType.VarChar).Value = obj.Categoria;
+                    cmd.Parameters.Add("@tipo", SqlDbType.VarChar).Value = obj.Tipo;
+                    cmd.Parameters.Add("@fabricante", SqlDbType.VarChar).Value = obj.Fabricante;
+                    cmd.Parameters.Add("@valor_litro", SqlDbType.Decimal).Value = obj.ValorLitro;
+                    cmd.Parameters.Add("@qtde", SqlDbType.Int).Value = obj.QtdeLitro;
+                    cmd.Parameters.Add("@valor_total", SqlDbType.Decimal).Value = obj.ValorTotal;
+                    cmd.Parameters.Add("@email", SqlDbType.VarChar).Value = obj.Email;
 
                     conn.Open();
                     cmd.ExecuteNonQuery();

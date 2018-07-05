@@ -39,18 +39,27 @@ create table servico_troca_oleo
 	categoria	varchar(50),
 	tipo		varchar(50),
 	fabricante	varchar(50),
-	valor_total	varchar(50),
+	valor_litro	decimal(8,2),
+	qtde		int,
+	valor_total decimal(8,2),
 	email		varchar(50)
 )
-
+drop table servico_troca_oleo
 bulk insert usuario
-from 'C:\Users\Aluno\Documents\GitHub\ExercicioTrocaOleo\usuarios.txt'
+from 'D:\Documents\GitHub\ExercicioTrocaOleo\usuarios.txt'
 with (codepage='ACP', fieldterminator = ';')
 
 bulk insert cliente
-from 'C:\Users\Aluno\Documents\GitHub\ExercicioTrocaOleo\Clientes.txt'
+from 'D:\Documents\GitHub\ExercicioTrocaOleo\Clientes.txt'
 with (codepage='ACP', fieldterminator = ';')
 
 bulk insert oleo
-from 'C:\Users\Aluno\Documents\GitHub\ExercicioTrocaOleo\Oleos.txt'
+from 'D:\Documents\GitHub\ExercicioTrocaOleo\Oleos.txt'
 with (codepage='ACP', fieldterminator = ';')
+
+--SELECT*FROM usuario
+
+--SELECT * FROM CLIENTE
+select * from oleo
+
+--SELECT * FROM servico_troca_oleo
